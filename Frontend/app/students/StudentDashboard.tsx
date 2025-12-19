@@ -8,12 +8,9 @@ import {
 } from "react-native";
 import { useState } from "react";
 import React from "react";
-import {
-  MenuIcon,
-  LogOutIcon,
-} from "lucide-react-native";
+import { MenuIcon, LogOutIcon, UserIcon, SettingsIcon } from "lucide-react-native";
 import { router } from "expo-router";
-import PaymentList from "./paymentlist";
+import PaymentList from "../components/paymentlist";
 
 const StudentDashboard = () => {
   const handlePayClick = (punishment: any) => {
@@ -41,28 +38,27 @@ const StudentDashboard = () => {
   ];
 
   const MenuItems = [
-    { label: "Settings" },
+    { label: "Settings", icon: <SettingsIcon /> },
     {
       label: "Logout",
       onPress: () => router.push("/Login"),
       icon: <LogOutIcon />,
     },
+    {
+      label: "Profile",
+  
+      icon: <UserIcon />,
+    },
   ];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
 
   return (
     <View className="flex bg-gray-100 w-full h-full max-h-200">
       {/* 1. Header Section */}
-      <View className="flex-row h-28 bg-green-600 items-center justify-between px-4 pt-8 shadow-md">
-        <View
-          className="w-12 h-12 rounded-3xl bg-white/20 backdrop-blur-sm items-center justify-center border-2 border-white/30"
-          style={{ zIndex: 1000, elevation: 10 }}
-        >
-          <View className="w-8 h-8 rounded-full bg-green-500 items-center justify-center">
-            <Text className="text-white font-bold text-lg">NS</Text>
-          </View>
-        </View>
-        
+      <View className="flex-row h-35 bg-green-600 items-center justify-between px-4 pt-8 shadow-md">
+      
+
         <View className="relative">
           <TouchableOpacity
             className="p-2"
@@ -71,11 +67,24 @@ const StudentDashboard = () => {
             <MenuIcon size={24} color="white" />
           </TouchableOpacity>
         </View>
+          <View
+          className="w-12 h-12 rounded-3xl bg-white/20 items-center justify-center border-2 mb-2"
+          style={{ zIndex: 1000, elevation: 10 }}
+        >
+          <TouchableOpacity onPress={() => router.push("/students/profile")}>
+            <View className="w-12 h-12 rounded-full bg-red-200 items-center justify-center">
+              <Image
+                source={require("../../assets/images/photo.jpg")}
+                style={{ width: 40, height: 40, borderRadius: 50 }}
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
 
       {isMenuOpen && (
         <View
-          className="absolute top-28 right-4 w-48 bg-white rounded-2xl py-2 shadow-xl border border-gray-100"
+          className="absolute top-20 w-48 h-full bg-white py-2 shadow-xl border border-gray-100"
           style={{ zIndex: 99999, elevation: 30, position: "absolute" }}
         >
           {MenuItems.map((item) => (
@@ -136,4 +145,3 @@ const StudentDashboard = () => {
 
 export default StudentDashboard;
 
-const styles = StyleSheet.create({});
