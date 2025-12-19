@@ -1,6 +1,9 @@
-import StudentDashboard from "./Screens/StudentDashboard";
+import StudentDashboard from './Screens/StudentDashboard'
+import React from 'react'
 
-export default function Student() {
-
-  return  <StudentDashboard />;
+const student = () => {
+  return <StudentDashboard/>
 }
+
+export default student
+

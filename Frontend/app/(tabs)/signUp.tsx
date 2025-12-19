@@ -6,7 +6,7 @@ import {router} from "expo-router";
 const SignUpScreen = () => {
   const department = [
     "computer science",
-    "engereening",
+      "engineering",
     "Accounting",
     "Business",
     "Marketing",
@@ -63,7 +63,7 @@ router.push("/Login")
           </View>
           <View className="mb-5">
             <Text className="text-center text-xl font-semibold mt-2">
-              Register!
+              Register
             </Text>
           </View>
         </View>
@@ -153,12 +153,12 @@ router.push("/Login")
                 </TouchableOpacity>
               ))}
           </View>
-          <View className="flex flex-row justify-center items-center bg">
+          <View className="flex flex-row justify-center items-center">
             <Text className="text-red-600">{errorMessage}</Text>
           </View>
              <View className="border border-black/5 rounded-2xl w-full h-16">
-             <TouchableOpacity className="flex-1 p-4 w-full bg-green-600 rounded-2xl">
-              <Text className="text-center text-white font-semibold" onPress={handleSignUp}>Sign Up</Text>
+             <TouchableOpacity className="flex-1 p-4 w-full bg-green-600 rounded-2xl" onPress={handleSignUp}>
+              <Text className="text-center text-white font-semibold">Sign Up</Text>
              </TouchableOpacity>
           </View>
           <View className="flex flex-row justify-center items-center">

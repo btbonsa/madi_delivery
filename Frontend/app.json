@@ -1,10 +1,11 @@
 {
   "expo": {
-    "name": "HRpay",
-    "slug": "HRpay",
+    "name": "Front",
+    "slug": "Front",
     "version": "1.0.0",
     "orientation": "portrait",
-    "scheme": "hrpay",
+    "icon": "./assets/images/icon.png",
+    "scheme": "front",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -21,7 +22,6 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
@@ -37,8 +37,7 @@
             "backgroundColor": "#000000"
           }
         }
-      ],
-      "expo-font"
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
