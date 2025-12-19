@@ -68,7 +68,7 @@ router.push("/Login")
           </View>
         </View>
         <View className="flex mx-4 items-center gap-3">
-          <View className="border border-black/5 rounded-2xl w-full h-16 ">
+          <View className="border border-black/5 rounded-2xl w-full h-15 ">
             <TextInput
               placeholder="Full Name"
               className="flex-1 p-4 w-full bg-black/5"
@@ -77,7 +77,7 @@ router.push("/Login")
               onChangeText={setFullName}
             />
           </View>
-          <View className="border border-black/5 rounded-2xl w-full h-16">
+          <View className="border border-black/5 rounded-2xl w-full h-15">
             <TextInput
               placeholder="Email"
               className="flex-1 p-4 w-full bg-black/5"
@@ -86,7 +86,7 @@ router.push("/Login")
               onChangeText={setEmail}
             />
           </View>
-          <View className="border border-black/5 rounded-2xl w-full h-16">
+          <View className="border border-black/5 rounded-2xl w-full h-15">
             <TextInput
               placeholder="password"
               className="flex-1 p-4 w-full bg-black/5"
@@ -95,7 +95,7 @@ router.push("/Login")
               onChangeText={setPassword}
             />
           </View>
-          <View className="border border-black/5 rounded-2xl w-full h-16">
+          <View className="border border-black/5 rounded-2xl w-full h-15">
             <TextInput
               placeholder="confirm Password"
               className="flex-1 p-4 w-full bg-black/5"
@@ -104,7 +104,7 @@ router.push("/Login")
               onChangeText={setConfirmPassword}
             />
           </View>
-          <View className="border border-black/5 rounded-2xl w-full h-16">
+          <View className="border border-black/5 rounded-2xl w-full h-15">
             <TextInput
               placeholder="select"
               className="flex-1 p-4 w-full bg-black/5"
@@ -113,7 +113,7 @@ router.push("/Login")
               onFocus={() => setOption(true)}
             />
           </View>
-              <View className="border border-black/5 rounded-2xl w-full h-16">
+              <View className="border border-black/5 rounded-2xl w-full h-15">
             <TextInput
               placeholder="select"
               className="flex-1 p-4 w-full bg-black/5"
@@ -156,7 +156,7 @@ router.push("/Login")
           <View className="flex flex-row justify-center items-center">
             <Text className="text-red-600">{errorMessage}</Text>
           </View>
-             <View className="border border-black/5 rounded-2xl w-full h-16">
+             <View className="border border-black/5 rounded-2xl w-full h-15">
              <TouchableOpacity className="flex-1 p-4 w-full bg-green-600 rounded-2xl" onPress={handleSignUp}>
               <Text className="text-center text-white font-semibold">Sign Up</Text>
              </TouchableOpacity>

@@ -22,7 +22,7 @@ const LoginScreen = () => {
       return;
     }
     if (email === "bonsa@gmail.com" && password === "123456") {
-      router.push("/student");
+      router.push("/students");
     } else {
       setErrorMessage("Invalid email or password");
     }
@@ -35,7 +35,7 @@ const LoginScreen = () => {
             <GraduationCap className="w-10 h-10 text-black " />
           </View>
         </View>
-        <View className="flex mx-4 space-y-4 gap-3">
+        <View className="flex mx-4 space-y-1 gap-3">
           <Text className="text-2xl font-semibold text-center mb-5">Login</Text>
           <View className="bg-black/5 rounded-2xl w-full ">
             <TextInput
@@ -59,14 +59,14 @@ const LoginScreen = () => {
             <Text className="text-red-600">{errorMessage}</Text>
           </View>
           <View className="w-full">
-            <TouchableOpacity className="bg-green-600 rounded-2xl w-full p-4 items-center" onPress={onFinish}>
+            <TouchableOpacity className="bg-green-600 rounded-2xl w-full p-4 items-center mt-6" onPress={onFinish}>
               <Text className="text-white">Login</Text>
             </TouchableOpacity>
           </View>
        
           <View className="flex flex-row justify-center items-center">
             <Text>Don't have an account?</Text>
-            <TouchableOpacity onPress={() => router.push("/(tabs)/Login")}>
+            <TouchableOpacity onPress={() => router.push("/signUp")}>
               <Text className="text-blue-600">Sign Up</Text>
             </TouchableOpacity>
           </View>
