@@ -10,7 +10,7 @@ import { useState } from "react";
 import React from "react";
 import { MenuIcon, LogOutIcon, UserIcon, SettingsIcon } from "lucide-react-native";
 import { router } from "expo-router";
-import PaymentList from "../components/paymentlist";
+import PaymentList from "../components/Orders";
 
 const StudentDashboard = () => {
   const handlePayClick = (punishment: any) => {
@@ -134,8 +134,6 @@ const StudentDashboard = () => {
         </View>
         <View className="mb-6">
           <PaymentList
-            punishments={samplePunishments}
-            onPayClick={handlePayClick}
           />
         </View>
       </ScrollView>
