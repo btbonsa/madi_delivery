@@ -3,7 +3,9 @@ import React from "react";
 import { TextInput } from "react-native";
 import { useState } from "react";
 import {router} from "expo-router";
-const SignUpScreen = () => {
+import axios from 'axios';
+
+const SignUpScreen = async() => {
   const department = [
     "computer science",
       "engineering",
@@ -52,6 +54,17 @@ if(password !== confirmPassword){
 }
 router.push("/Login")
 }
+
+
+
+
+ 
+    const response = await axios.post("http://localhost:7000/api/auth/signup", {
+    
+    });
+
+    console.log(response.data);
+
 
 
   return (
