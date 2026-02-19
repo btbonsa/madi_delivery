@@ -7,6 +7,7 @@ import {
   TextInput,
 } from "react-native";
 import { useState } from "react";
+import axios from "axios"
 
 const size = {
   width: 35,
@@ -33,6 +34,25 @@ const items = [
 function Paymentlist() {
   const [Ordering, SetOrdering] = useState(false);
   const [payment, SetPayment] = useState(false);
+  const [dorm, setDorm] = useState("");
+  const [phone, setPhone] = useState("");
+  const [error, setError] = useState("");
+  
+const orderHandler = async() => {
+  try{
+    const response = await axios.post("http://localhost:7000/api/auth/requests", {
+      dorm: dorm,
+      phone: phone,
+    });
+    console.log(response.data);
+    setError(response.data.msg);
+  } catch (error) {
+    console.log(error);
+    setError("Failed to place order");
+  }
+
+}
+
   return (
     <View>
       <Modal visible={Ordering} transparent={true} animationType="fade">
@@ -43,7 +63,15 @@ function Paymentlist() {
             </View>
             <View className="w-full h-full items-center justify-center relative bottom-28">
               <Text>{items[0].image}</Text>
-              <View className="bg-green-700 w-44 h-12 rounded-xl items-center justify-center relative top-4">
+              <View className="w-44 h-12 border border-gray-300 rounded-lg items-center justify-center top-6">
+                <TextInput
+                  placeholder="Dormitory"
+                  value={dorm}
+                  onChangeText={setDorm}
+                  className=" w-full h-full px-2 text-center"
+                />
+              </View>
+              <View className="bg-green-700 w-44 h-12 rounded-xl items-center justify-center relative top-10">
                 <TouchableOpacity onPress={() => SetPayment(true)}>
                   <Text className="text-white text-center text-[14px]">
                     Pay With M-PESA
@@ -68,7 +96,12 @@ function Paymentlist() {
               <TouchableOpacity onPress={() => SetPayment(false)}>
                 <Image
                   source={require("../../assets/images/close.png")}
-                  style={{ width: 22, height: 24, tintColor: "red" ,backgroundColor:"white" }}
+                  style={{
+                    width: 22,
+                    height: 24,
+                    tintColor: "red",
+                    backgroundColor: "white",
+                  }}
                   className="relative left-28 cursor-pointer"
                 />
               </TouchableOpacity>
@@ -76,9 +109,12 @@ function Paymentlist() {
             <Text className="text-xl">Enter your M-pesa Number</Text>
             <View className="bg-gray-100 w-5/6 h-12 rounded-xl items-center justify-start relative top-2 border border-gray-400 flex-row">
               <Text className="text-xl relative left-6 bottom-0.5">+257</Text>
-              <TextInput className="w-[60%] rounded-xl relative left-6 text-xl" />
+              <TextInput className="w-[60%] rounded-xl relative left-6 text-xl" value={phone} onChangeText={setPhone} />
             </View>
-            <TouchableOpacity className="bg-green-700 w-28 h-10 rounded-xl items-center justify-center relative top-10">
+            <View className="flex flex-row justify-center items-center">
+              <Text className="text-red-600">{error}</Text>
+            </View>
+            <TouchableOpacity className="bg-green-700 w-28 h-10 rounded-xl items-center justify-center relative top-10" onPress={orderHandler}>
               <Text className="text-white text-[16px]"> Send</Text>
             </TouchableOpacity>
           </View>

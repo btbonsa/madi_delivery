@@ -15,6 +15,7 @@ app.get("/", (req, res)=>{
 
 app.use('/api/auth', require('./Routes/signup'));
 app.use('/api/auth', require('./Routes/Login'));
+app.use('/api/auth', require('./Routes/Requests'));
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
