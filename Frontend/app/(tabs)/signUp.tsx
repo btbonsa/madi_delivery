@@ -4,8 +4,10 @@ import { TextInput } from "react-native";
 import { useState } from "react";
 import {router} from "expo-router";
 import axios from 'axios';
+import { Alert } from "react-native";
 
-const SignUpScreen = async() => {
+const SignUpScreen = () => {
+ 
   const department = [
     "computer science",
       "engineering",
@@ -42,32 +44,31 @@ const SignUpScreen = async() => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-const handleSignUp = () => {
-  setErrorMessage("")
-if(!fullName || !email || !password || !confirmPassword){
-    setErrorMessage("Please fill all fields")
-    return
-}
-if(password !== confirmPassword){
-    setErrorMessage("Password do not match")
-    return
-}
-router.push("/Login")
-}
+const handleSignUp = async () => {
+  try {
+    const response = await axios.post(
+      "http://localhost:7000/api/auth/signup",
+      {
+        FullName: fullName,
+        Email: email,
+        Password: password,
+        ConfirmPassword: confirmPassword,
+        Department: selected,
+        Batch: batchSelected,
+      }
+    );
+    setErrorMessage(response.data.msg || "Something went wrong");
+    router.push("/Login");
+  } catch (error: any) {
+    setErrorMessage(
+      error.response?.data?.msg ||
+      "Backend error"
+    );
 
+  }
+};
 
-
-
- 
-    const response = await axios.post("http://localhost:7000/api/auth/signup", {
-    
-    });
-
-    console.log(response.data);
-
-
-
-  return (
+ return (
     <ScrollView className="bg-white w-full h-screen">
       <View className="flex-1 mx-4 justify-center my-20">
         <View className="flex justify-center items-center">
@@ -84,7 +85,7 @@ router.push("/Login")
           <View className="border border-black/5 rounded-2xl w-full h-15 ">
             <TextInput
               placeholder="Full Name"
-              className="flex-1 p-4 w-full bg-black/5"
+              className="flex-1 p-4 w-full bg-black/5 rounded-2xl"
               selectTextOnFocus
               value={fullName}
               onChangeText={setFullName}
@@ -93,7 +94,7 @@ router.push("/Login")
           <View className="border border-black/5 rounded-2xl w-full h-15">
             <TextInput
               placeholder="Email"
-              className="flex-1 p-4 w-full bg-black/5"
+              className="flex-1 p-4 w-full bg-black/5 rounded-2xl"
               selectTextOnFocus
               value={email}
               onChangeText={setEmail}
@@ -102,7 +103,7 @@ router.push("/Login")
           <View className="border border-black/5 rounded-2xl w-full h-15">
             <TextInput
               placeholder="password"
-              className="flex-1 p-4 w-full bg-black/5"
+              className="flex-1 p-4 w-full bg-black/5 rounded-2xl"
               secureTextEntry
               value={password}
               onChangeText={setPassword}
@@ -111,7 +112,7 @@ router.push("/Login")
           <View className="border border-black/5 rounded-2xl w-full h-15">
             <TextInput
               placeholder="confirm Password"
-              className="flex-1 p-4 w-full bg-black/5"
+              className="flex-1 p-4 w-full bg-black/5 rounded-2xl"
               secureTextEntry
               value={confirmPassword}
               onChangeText={setConfirmPassword}
@@ -120,7 +121,7 @@ router.push("/Login")
           <View className="border border-black/5 rounded-2xl w-full h-15">
             <TextInput
               placeholder="select"
-              className="flex-1 p-4 w-full bg-black/5"
+              className="flex-1 p-4 w-full bg-black/5 rounded-2xl"
               selectTextOnFocus
               value={selected}
               onFocus={() => setOption(true)}
@@ -129,7 +130,7 @@ router.push("/Login")
               <View className="border border-black/5 rounded-2xl w-full h-15">
             <TextInput
               placeholder="select"
-              className="flex-1 p-4 w-full bg-black/5"
+              className="flex-1 p-4 w-full bg-black/5 rounded-2xl"
               selectTextOnFocus
               value={batchSelected}
               onFocus={() => setBatchOption(true)}
@@ -140,7 +141,7 @@ router.push("/Login")
               department.map((item) => (
                 <TouchableOpacity
                   key={item}
-                  className="p-4 w-80 bg-black/5"
+                  className="p-4 w-80 bg-black/5 rounded-2xl"
                   onPress={() => {
                     setSelected(item);
                     setOption(!option);
@@ -156,7 +157,7 @@ router.push("/Login")
               batch.map((item) => (
                 <TouchableOpacity
                   key={item}
-                  className="p-4 w-80 bg-black/5"
+                  className="p-4 w-80 bg-black/5 rounded-2xl"
                   onPress={() => {
                     setBatchSelected(item);
                     setBatchOption(!batchOption);
@@ -174,7 +175,7 @@ router.push("/Login")
               <Text className="text-center text-white font-semibold">Sign Up</Text>
              </TouchableOpacity>
           </View>
-          <View className="flex flex-row justify-center items-center">
+          <View className="flex flex-row justify-center items-center ">
             <Text>Already have an account?</Text>
             <TouchableOpacity className="">
               <Text className="text-blue-600" onPress={() => router.push("/Login")}>Login</Text>

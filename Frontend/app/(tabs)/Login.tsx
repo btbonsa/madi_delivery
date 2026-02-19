@@ -4,27 +4,30 @@ import {
   TextInput,
   View,
   Text,
-  
 } from "react-native";
+
 import { router } from "expo-router";
 import { GraduationCap } from "lucide-react-native";
 import { useState } from "react";
+import axios from "axios";
 
 const LoginScreen = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onFinish = () => {
-    setErrorMessage(" ")
-    if (!password || !email) {
-      setErrorMessage("Please fill all fields");
-      return;
-    }
-    if (email === "bonsa@gmail.com" && password === "123456") {
+  const onFinish = async () => {
+    try {
+      const response = await axios.post("http://localhost:7000/api/auth/login", {
+        Email: email,
+        Password: password,
+      });
+      setErrorMessage(response.data.msg);
       router.push("/students");
-    } else {
-      setErrorMessage("Invalid email or password");
+    } catch (error: any) {
+      if (error.response) {
+        setErrorMessage(error.response.data.msg);
+      }
     }
   };
   return (
@@ -55,15 +58,18 @@ const LoginScreen = () => {
               onChangeText={setPassword}
             />
           </View>
-             <View className="flex items-center justify-center my-2">
+          <View className="flex items-center justify-center my-2">
             <Text className="text-red-600">{errorMessage}</Text>
           </View>
           <View className="w-full">
-            <TouchableOpacity className="bg-green-600 rounded-2xl w-full p-4 items-center mt-6" onPress={onFinish}>
+            <TouchableOpacity
+              className="bg-green-600 rounded-2xl w-full p-4 items-center mt-6"
+              onPress={onFinish}
+            >
               <Text className="text-white">Login</Text>
             </TouchableOpacity>
           </View>
-       
+
           <View className="flex flex-row justify-center items-center">
             <Text>Don't have an account?</Text>
             <TouchableOpacity onPress={() => router.push("/signUp")}>
